@@ -5,6 +5,9 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -42,6 +45,17 @@ fun FormBiodataScreen(modifier: Modifier = Modifier) {
                 .fillMaxSize()
                 .height(dimensionResource(id = R.dimen.header_height))
         )
+
+        Surface(
+            shape = RoundedCornerShape(
+                topStart = dimensionResource(id = R.dimen.card_corner_radius),
+                topEnd = dimensionResource(id = R.dimen.card_corner_radius)
+            ),
+            color = colorResource(id = R.color.white),
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(top = dimensionResource(id = R.dimen.card_top_offset))
+        ) { }
 
     }
 }
