@@ -6,6 +6,8 @@
     <string name="label_last_name">Nama Belakang</string>
     <string name="label_email">Email</string>
     <string name="label_tgl_lahir">Tgl Lahir</string>
+    <string name="label_experience">Experience</string>
+
 
 
 </resources>
