@@ -10,7 +10,7 @@ fun FormBiodataScreen(modifier: Modifier = Modifier) {
     var firstName by remember { mutableStateOf("") }
     var lastName by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
-
+    var tglLahir by remember { mutableStateOf("") }
 
 
 }
