@@ -14,6 +14,7 @@ fun FormBiodataScreen(modifier: Modifier = Modifier) {
     var experience by remember { mutableStateOf("") }
 
     var isAndroidChecked by remember { mutableStateOf(false) }
+    var isUIXChecked by remember { mutableStateOf(false) }
 
 
 }
