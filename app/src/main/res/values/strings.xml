@@ -12,6 +12,9 @@
     <string name="skill_uiux">UI/UX</string>
     <string name="skill_web">Web</string>
     <string name="btn_proceed">Lanjut</string>
+    <string name="desc_header_img">Header Background</string>
+    <string name="desc_date_icon">Ikon Tanggal Lahir</string>
+    <string name="desc_dropdown_icon">Ikon Dropdown</string>
 
 
 
