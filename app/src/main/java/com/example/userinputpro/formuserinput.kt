@@ -15,6 +15,7 @@ fun FormBiodataScreen(modifier: Modifier = Modifier) {
 
     var isAndroidChecked by remember { mutableStateOf(false) }
     var isUIXChecked by remember { mutableStateOf(false) }
+    var isWebChecked by remember { mutableStateOf(false) }
 
 
 }
