@@ -7,4 +7,12 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="purple_title">#6A2EC8</color>
+    <color name="text_subtitle">#8E8E93</color>
+    <color name="text_field_border">#B0B0B0</color>
+    <color name="btn_disabled_bg">#E0E0E0</color>
+    <color name="btn_disabled_text">#FFFFFF</color>
+    <color name="card_bg">#FFFFFF</color>
+
 </resources>
