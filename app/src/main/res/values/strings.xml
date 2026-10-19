@@ -16,6 +16,15 @@
     <string name="desc_date_icon">Ikon Tanggal Lahir</string>
     <string name="desc_dropdown_icon">Ikon Dropdown</string>
 
+    <string name="exp_beginner">Beginner (&lt; 1 thn)</string>
+    <string name="exp_intermediate">Intermediate (1–3 thn)</string>
+    <string name="exp_advanced">Advanced (&gt; 3 thn)</string>
+
+    <string-array name="experience_options">
+        <item>@string/exp_beginner</item>
+        <item>@string/exp_intermediate</item>
+        <item>@string/exp_advanced</item>
+    </string-array>
 
 
 </resources>
