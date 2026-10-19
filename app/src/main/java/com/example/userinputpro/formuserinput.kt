@@ -1,5 +1,8 @@
 package com.example.userinputpro
 
+import android.R.attr.contentDescription
+import android.R.attr.icon
+import android.R.id.icon
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -18,6 +21,10 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.Icon
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowDropDown
+import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -33,6 +40,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
+
 
 
 @Composable
@@ -133,10 +141,27 @@ fun FormBiodataScreen(modifier: Modifier = Modifier) {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.spacing_medium))
-                ) { }
+                ) {
+                    OutlinedTextField(
+                        value = tglLahir,
+                        onValueChange = {tglLahir = it},
+                        label = { Text(text = stringResource(id = R.string.label_tgl_lahir))},
+                        trailingIcon = {
+                            Icon(
+                                imageVector = Icons.Default.DateRange,
+                                contentDescription = stringResource(id = R.string.desc_date_icon)
+                            )
+                        },
+                        shape = RoundedCornerShape(dimensionResource(id = R.dimen.button_corner_radius)),
+                        singleLine = true,
+                        modifier = Modifier.weight(1f)
+
+                    )
+                }
 
             }
         }
 
     }
 }
+
