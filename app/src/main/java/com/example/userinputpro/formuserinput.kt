@@ -106,6 +106,17 @@ fun FormBiodataScreen(modifier: Modifier = Modifier) {
                         singleLine = true,
                         modifier = Modifier.weight(1f)
                     )
+
+                    OutlinedTextField(
+                        value = lastName,
+                        onValueChange = {lastName = it},
+                        label = { Text(text = stringResource(id = R.string.label_last_name))},
+                        shape = RoundedCornerShape(dimensionResource(id = R.dimen.button_corner_radius)),
+                        singleLine = true,
+                        modifier = Modifier.weight(1f)
+                    )
+
+
                 }
 
             }
