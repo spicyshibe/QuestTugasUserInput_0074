@@ -166,9 +166,15 @@ fun FormBiodataScreen(modifier: Modifier = Modifier) {
                     fontSize = 12.sp,
                     modifier = Modifier.fillMaxWidth()
                 )
+                Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacing_small)))
 
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.spacing_medium)),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
 
-
+                }
             }
         }
 
