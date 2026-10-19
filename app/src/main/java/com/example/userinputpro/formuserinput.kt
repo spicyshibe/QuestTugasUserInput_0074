@@ -1,8 +1,4 @@
 package com.example.userinputpro
-
-import android.R.attr.contentDescription
-import android.R.attr.icon
-import android.R.id.icon
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -25,7 +21,13 @@ import androidx.compose.material3.Icon
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.DateRange
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Checkbox
+import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExposedDropdownMenuBox
+import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -37,14 +39,16 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.semantics.Role.Companion.Checkbox
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FormBiodataScreen(modifier: Modifier = Modifier) {
     var firstName by remember { mutableStateOf("") }
@@ -52,6 +56,10 @@ fun FormBiodataScreen(modifier: Modifier = Modifier) {
     var email by remember { mutableStateOf("") }
     var tglLahir by remember { mutableStateOf("") }
     var experience by remember { mutableStateOf("") }
+
+    val experienceOptions = stringArrayResource(id = R.array.experience_options)
+    var expanded by remember { mutableStateOf(false) }
+    var selectedExperience by remember { mutableStateOf("") }
 
     var isAndroidChecked by remember { mutableStateOf(false) }
     var isUIXChecked by remember { mutableStateOf(false) }
@@ -87,7 +95,7 @@ fun FormBiodataScreen(modifier: Modifier = Modifier) {
                     .padding(horizontal = dimensionResource(id = R.dimen.padding_large))
                     .verticalScroll(rememberScrollState()),
                 horizontalAlignment = Alignment.CenterHorizontally
-            ){
+            ) {
                 Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacing_large)))
                 Text(
                     text = stringResource(id = R.string.form_title),
@@ -107,11 +115,11 @@ fun FormBiodataScreen(modifier: Modifier = Modifier) {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.spacing_medium))
-                ){
+                ) {
                     OutlinedTextField(
                         value = firstName,
-                        onValueChange = {firstName = it},
-                        label = { Text(text = stringResource(id = R.string.label_first_name))},
+                        onValueChange = { firstName = it },
+                        label = { Text(text = stringResource(id = R.string.label_first_name)) },
                         shape = RoundedCornerShape(dimensionResource(id = R.dimen.button_corner_radius)),
                         singleLine = true,
                         modifier = Modifier.weight(1f)
@@ -119,8 +127,8 @@ fun FormBiodataScreen(modifier: Modifier = Modifier) {
 
                     OutlinedTextField(
                         value = lastName,
-                        onValueChange = {lastName = it},
-                        label = { Text(text = stringResource(id = R.string.label_last_name))},
+                        onValueChange = { lastName = it },
+                        label = { Text(text = stringResource(id = R.string.label_last_name)) },
                         shape = RoundedCornerShape(dimensionResource(id = R.dimen.button_corner_radius)),
                         singleLine = true,
                         modifier = Modifier.weight(1f)
@@ -130,8 +138,8 @@ fun FormBiodataScreen(modifier: Modifier = Modifier) {
 
                 OutlinedTextField(
                     value = email,
-                    onValueChange = {email = it},
-                    label = { Text(text = stringResource(id = R.string.label_email))},
+                    onValueChange = { email = it },
+                    label = { Text(text = stringResource(id = R.string.label_email)) },
                     shape = RoundedCornerShape(dimensionResource(id = R.dimen.button_corner_radius)),
                     singleLine = true,
                     modifier = Modifier.fillMaxWidth()
@@ -146,8 +154,8 @@ fun FormBiodataScreen(modifier: Modifier = Modifier) {
                 ) {
                     OutlinedTextField(
                         value = tglLahir,
-                        onValueChange = {tglLahir = it},
-                        label = { Text(text = stringResource(id = R.string.label_tgl_lahir))},
+                        onValueChange = { tglLahir = it },
+                        label = { Text(text = stringResource(id = R.string.label_tgl_lahir)) },
                         trailingIcon = {
                             Icon(
                                 imageVector = Icons.Default.DateRange,
@@ -159,59 +167,115 @@ fun FormBiodataScreen(modifier: Modifier = Modifier) {
                         modifier = Modifier.weight(1f)
 
                     )
-                }
-                Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacing_medium)))
 
-                Text(
-                    text = stringResource(id = R.string.label_experience),
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 12.sp,
-                    modifier = Modifier.fillMaxWidth()
-                )
-                Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacing_small)))
-
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.spacing_medium)),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        Checkbox(
-                            checked = isAndroidChecked,
-                            onCheckedChange = { isAndroidChecked = it }
+                    ExposedDropdownMenuBox(
+                        expanded = expanded,
+                        onExpandedChange = { expanded = !expanded },
+                        modifier = Modifier.weight(1f)
+                    ) {
+                        OutlinedTextField(
+                            value = selectedExperience,
+                            onValueChange = {},
+                            readOnly = true,
+                            label = { Text(text = stringResource(id = R.string.label_experience)) },
+                            trailingIcon = {
+                                ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded)
+                            },
+                            shape = RoundedCornerShape(dimensionResource(id = R.dimen.button_corner_radius)),
+                            singleLine = true,
+                            modifier = Modifier
+                                .menuAnchor()
+                                .fillMaxWidth()
                         )
+
+                        ExposedDropdownMenu(
+                            expanded = expanded,
+                            onDismissRequest = { expanded = false }
+                        ) {
+                            experienceOptions.forEach { option ->
+                                DropdownMenuItem(
+                                    text = { Text(text = option) },
+                                    onClick = {
+                                        selectedExperience = option
+                                        expanded = false
+                                    }
+                                )
+                            }
+                        }
+                    }
+                    Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacing_medium)))
+
+                    Text(
+                        text = stringResource(id = R.string.label_pilih_skill),
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 12.sp,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                    Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacing_small)))
+
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.spacing_medium)),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Checkbox(
+                                checked = isAndroidChecked,
+                                onCheckedChange = { isAndroidChecked = it }
+                            )
+                            Text(
+                                text = stringResource(id = R.string.skill_android),
+                                fontSize = 12.sp
+                            )
+                        }
+
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Checkbox(
+                                checked = isUIXChecked,
+                                onCheckedChange = { isUIXChecked = it }
+                            )
+                            Text(
+                                text = stringResource(id = R.string.skill_android),
+                                fontSize = 12.sp
+                            )
+                        }
+
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Checkbox(
+                                checked = isWebChecked,
+                                onCheckedChange = { isWebChecked = it }
+                            )
+                            Text(
+                                text = stringResource(id = R.string.skill_android),
+                                fontSize = 12.sp
+                            )
+                        }
+                    }
+                    Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacing_large)))
+
+                    Button(
+                        onClick = { /* Aksi submit */ },
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = colorResource(id = R.color.btn_disabled_bg),
+                            contentColor = colorResource(id = R.color.btn_disabled_text)
+                        ),
+                        shape = RoundedCornerShape(dimensionResource(id = R.dimen.button_corner_radius)),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(48.dp)
+                    ) {
                         Text(
-                            text = stringResource(id = R.string.skill_android),
-                            fontSize = 12.sp
+                            text = stringResource(id = R.string.btn_proceed),
+                            fontWeight = FontWeight.Bold
                         )
                     }
 
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        Checkbox(
-                            checked = isUIXChecked,
-                            onCheckedChange = { isUIXChecked = it }
-                        )
-                        Text(
-                            text = stringResource(id = R.string.skill_android),
-                            fontSize = 12.sp
-                        )
-                    }
-
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        Checkbox(
-                            checked = isWebChecked,
-                            onCheckedChange = { isWebChecked = it }
-                        )
-                        Text(
-                            text = stringResource(id = R.string.skill_android),
-                            fontSize = 12.sp
-                        )
-                    }
-
+                    Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_large)))
                 }
             }
-        }
 
+        }
     }
+
 }
 
