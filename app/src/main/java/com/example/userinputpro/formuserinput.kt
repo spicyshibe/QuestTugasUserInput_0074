@@ -1,4 +1,5 @@
 package com.example.userinputpro
+
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -10,16 +11,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.material3.Icon
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -28,6 +23,10 @@ import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.ExposedDropdownMenuDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -46,8 +45,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FormBiodataScreen(modifier: Modifier = Modifier) {
@@ -55,7 +52,6 @@ fun FormBiodataScreen(modifier: Modifier = Modifier) {
     var lastName by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var tglLahir by remember { mutableStateOf("") }
-    var experience by remember { mutableStateOf("") }
 
     val experienceOptions = stringArrayResource(id = R.array.experience_options)
     var expanded by remember { mutableStateOf(false) }
@@ -75,7 +71,7 @@ fun FormBiodataScreen(modifier: Modifier = Modifier) {
             contentDescription = stringResource(id = R.string.desc_header_img),
             contentScale = ContentScale.Crop,
             modifier = Modifier
-                .fillMaxSize()
+                .fillMaxWidth()
                 .height(dimensionResource(id = R.dimen.header_height))
         )
 
@@ -97,12 +93,14 @@ fun FormBiodataScreen(modifier: Modifier = Modifier) {
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacing_large)))
+
                 Text(
                     text = stringResource(id = R.string.form_title),
                     fontSize = 24.sp,
                     fontWeight = FontWeight.Bold,
                     color = colorResource(id = R.color.purple_title)
                 )
+
                 Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacing_small)))
 
                 Text(
@@ -111,7 +109,9 @@ fun FormBiodataScreen(modifier: Modifier = Modifier) {
                     color = colorResource(id = R.color.text_subtitle),
                     textAlign = TextAlign.Center
                 )
+
                 Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacing_large)))
+
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.spacing_medium))
@@ -134,6 +134,7 @@ fun FormBiodataScreen(modifier: Modifier = Modifier) {
                         modifier = Modifier.weight(1f)
                     )
                 }
+
                 Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacing_medium)))
 
                 OutlinedTextField(
@@ -143,14 +144,15 @@ fun FormBiodataScreen(modifier: Modifier = Modifier) {
                     shape = RoundedCornerShape(dimensionResource(id = R.dimen.button_corner_radius)),
                     singleLine = true,
                     modifier = Modifier.fillMaxWidth()
-
                 )
 
                 Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacing_medium)))
 
+                // Row Tanggal Lahir & Dropdown
                 Row(
                     modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.spacing_medium))
+                    horizontalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.spacing_medium)),
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
                     OutlinedTextField(
                         value = tglLahir,
@@ -165,7 +167,6 @@ fun FormBiodataScreen(modifier: Modifier = Modifier) {
                         shape = RoundedCornerShape(dimensionResource(id = R.dimen.button_corner_radius)),
                         singleLine = true,
                         modifier = Modifier.weight(1f)
-
                     )
 
                     ExposedDropdownMenuBox(
@@ -203,79 +204,80 @@ fun FormBiodataScreen(modifier: Modifier = Modifier) {
                             }
                         }
                     }
-                    Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacing_medium)))
+                } // Penutup Row Tanggal & Dropdown yang benar
 
-                    Text(
-                        text = stringResource(id = R.string.label_pilih_skill),
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 12.sp,
-                        modifier = Modifier.fillMaxWidth()
-                    )
-                    Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacing_small)))
+                Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacing_medium)))
 
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.spacing_medium)),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Row(verticalAlignment = Alignment.CenterVertically) {
-                            Checkbox(
-                                checked = isAndroidChecked,
-                                onCheckedChange = { isAndroidChecked = it }
-                            )
-                            Text(
-                                text = stringResource(id = R.string.skill_android),
-                                fontSize = 12.sp
-                            )
-                        }
+                Text(
+                    text = stringResource(id = R.string.label_pilih_skill),
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 12.sp,
+                    modifier = Modifier.fillMaxWidth()
+                )
 
-                        Row(verticalAlignment = Alignment.CenterVertically) {
-                            Checkbox(
-                                checked = isUIXChecked,
-                                onCheckedChange = { isUIXChecked = it }
-                            )
-                            Text(
-                                text = stringResource(id = R.string.skill_android),
-                                fontSize = 12.sp
-                            )
-                        }
+                Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacing_small)))
 
-                        Row(verticalAlignment = Alignment.CenterVertically) {
-                            Checkbox(
-                                checked = isWebChecked,
-                                onCheckedChange = { isWebChecked = it }
-                            )
-                            Text(
-                                text = stringResource(id = R.string.skill_android),
-                                fontSize = 12.sp
-                            )
-                        }
-                    }
-                    Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacing_large)))
-
-                    Button(
-                        onClick = { /* Aksi submit */ },
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = colorResource(id = R.color.btn_disabled_bg),
-                            contentColor = colorResource(id = R.color.btn_disabled_text)
-                        ),
-                        shape = RoundedCornerShape(dimensionResource(id = R.dimen.button_corner_radius)),
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(48.dp)
-                    ) {
+                // Row Checkbox Skills
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Checkbox(
+                            checked = isAndroidChecked,
+                            onCheckedChange = { isAndroidChecked = it }
+                        )
                         Text(
-                            text = stringResource(id = R.string.btn_proceed),
-                            fontWeight = FontWeight.Bold
+                            text = stringResource(id = R.string.skill_android),
+                            fontSize = 12.sp
                         )
                     }
 
-                    Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_large)))
-                }
-            }
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Checkbox(
+                            checked = isUIXChecked,
+                            onCheckedChange = { isUIXChecked = it }
+                        )
+                        Text(
+                            text = stringResource(id = R.string.skill_uiux),
+                            fontSize = 12.sp
+                        )
+                    }
 
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Checkbox(
+                            checked = isWebChecked,
+                            onCheckedChange = { isWebChecked = it }
+                        )
+                        Text(
+                            text = stringResource(id = R.string.skill_web),
+                            fontSize = 12.sp
+                        )
+                    }
+                }
+
+                Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacing_large)))
+
+                Button(
+                    onClick = { },
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = colorResource(id = R.color.btn_disabled_bg),
+                        contentColor = colorResource(id = R.color.btn_disabled_text)
+                    ),
+                    shape = RoundedCornerShape(dimensionResource(id = R.dimen.button_corner_radius)),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(48.dp)
+                ) {
+                    Text(
+                        text = stringResource(id = R.string.btn_proceed),
+                        fontWeight = FontWeight.Bold
+                    )
+                }
+
+                Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_large)))
+            }
         }
     }
-
 }
-
