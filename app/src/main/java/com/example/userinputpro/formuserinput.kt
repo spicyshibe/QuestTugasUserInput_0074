@@ -186,7 +186,16 @@ fun FormBiodataScreen(modifier: Modifier = Modifier) {
                         )
                     }
 
-
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Checkbox(
+                            checked = isUIXChecked,
+                            onCheckedChange = { isUIXChecked = it }
+                        )
+                        Text(
+                            text = stringResource(id = R.string.skill_android),
+                            fontSize = 12.sp
+                        )
+                    }
                 }
             }
         }
