@@ -259,11 +259,21 @@ fun FormBiodataScreen(modifier: Modifier = Modifier) {
 
                 Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacing_large)))
 
+
+                val isFormValid = firstName.isNotBlank() &&
+                        lastName.isNotBlank() &&
+                        email.isNotBlank() &&
+                        tglLahir.isNotBlank() &&
+                        selectedExperience.isNotBlank() &&
+                        (isAndroidChecked || isUIXChecked || isWebChecked)
+
                 Button(
                     onClick = { },
+                    enabled = isFormValid,
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = colorResource(id = R.color.btn_disabled_bg),
-                        contentColor = colorResource(id = R.color.btn_disabled_text)
+                        containerColor = colorResource(id = R.color.purple_title),
+                        disabledContainerColor = colorResource(id = R.color.btn_disabled_bg),
+                        disabledContentColor = colorResource(id = R.color.btn_disabled_text)
                     ),
                     shape = RoundedCornerShape(dimensionResource(id = R.dimen.button_corner_radius)),
                     modifier = Modifier
@@ -275,6 +285,7 @@ fun FormBiodataScreen(modifier: Modifier = Modifier) {
                         fontWeight = FontWeight.Bold
                     )
                 }
+
 
                 Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_large)))
             }
