@@ -26,6 +26,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 
 
@@ -79,6 +80,15 @@ fun FormBiodataScreen(modifier: Modifier = Modifier) {
                     fontWeight = FontWeight.Bold,
                     color = colorResource(id = R.color.purple_title)
                 )
+                Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacing_small)))
+
+                Text(
+                    text = stringResource(id = R.string.form_subtitle),
+                    fontSize = 12.sp,
+                    color = colorResource(id = R.color.text_subtitle),
+                    textAlign = TextAlign.Center
+                )
+
             }
         }
 
