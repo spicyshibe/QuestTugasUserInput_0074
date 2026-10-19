@@ -158,6 +158,16 @@ fun FormBiodataScreen(modifier: Modifier = Modifier) {
 
                     )
                 }
+                Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.spacing_medium)))
+
+                Text(
+                    text = stringResource(id = R.string.label_experience),
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 12.sp,
+                    modifier = Modifier.fillMaxWidth()
+                )
+
+
 
             }
         }
